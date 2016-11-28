@@ -73,48 +73,10 @@ public class PluginManager {
 		this.plugins = null;
 	}
 
-	// protected String getPluginClass(URL pluginUrl) {
-	// InputStream is = null;
-	// try {
-	// DocumentBuilder builder = DocumentBuilderFactory.newInstance()
-	// .newDocumentBuilder();
-	// is = pluginUrl.openStream();
-	// Document doc = builder.parse(is);
-	// Node root = doc.getFirstChild();
-	// if (!this.mainTag.equals(root.getNodeName()))
-	// return null;
-	// NodeList children = root.getChildNodes();
-	// for (int i = 0; i < children.getLength(); i++) {
-	// Node child = children.item(i);
-	// if (!this.pluginTag.equals(child.getNodeName()))
-	// continue;
-	// if (child.getChildNodes().getLength() != 1)
-	// return null;
-	// Node text = child.getFirstChild();
-	// if (text.getNodeType() != Node.TEXT_NODE)
-	// return null;
-	// return text.getNodeValue();
-	// }
-	// return null;
-	// } catch (Exception exc) {
-	// return null;
-	// } finally {
-	// if (is != null) {
-	// try {
-	// is.close();
-	// } catch (Exception e) {
-	// }
-	// }
-	// }
-	// }
-	//
 	protected String getPluginClass(URL pluginUrl) {
-		InputStream is = null;
-		InputStreamReader isr = null;
-		try {
+		try (InputStream is = pluginUrl.openStream();
+				InputStreamReader isr = new InputStreamReader(is)) {
 			XMLElement xml = new XMLElement();
-			is = pluginUrl.openStream();
-			isr = new InputStreamReader(is);
 			xml.parseFromReader(isr);
 			if (!this.mainTag.equals(xml.getName()))
 				return null;
@@ -130,19 +92,6 @@ public class PluginManager {
 			return null;
 		} catch (Exception exc) {
 			return null;
-		} finally {
-			if (isr != null) {
-				try {
-					isr.close();
-				} catch (Exception e) {
-				}
-			}
-			if (is != null) {
-				try {
-					is.close();
-				} catch (Exception e) {
-				}
-			}
 		}
 	}
 
