@@ -47,7 +47,7 @@
 	<property name="laf-plugin.drop.dir" value="${module.laf-plugin.basedir}/drop" />
 	<property name="laf-plugin.lib.dir" value="${module.laf-plugin.basedir}/lib" />
 	<property name="laf-plugin.src.dir" value="${module.laf-plugin.basedir}/src/" />
-	<property name="laf-plugin.version" value="1.2dev Moonriver" />
+	<property name="laf-plugin.version" value="1.2final Moonriver" />
 
 	<path id="laf-plugin.module.bootclasspath">
 		<!-- Paths to be included in compilation bootclasspath -->
